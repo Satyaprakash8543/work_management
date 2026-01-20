@@ -88,7 +88,7 @@ export default function CustomNavbar() {
 
             <li>
               <Link
-                href="/#"
+                href="/login"
                 onClick={() => setIsOpen(false)}
                 className="rounded-md border border-white px-4 py-1 text-white bg-green-700 hover:bg-green-400  transition"
               >
@@ -98,7 +98,7 @@ export default function CustomNavbar() {
 
             <li>
               <Link
-                href="/#"
+                href="/signup"
                 onClick={() => setIsOpen(false)}
                 className="rounded-md bg-pink-700 px-4 py-1 text-white hover:bg-pink-400 transition"
               >
