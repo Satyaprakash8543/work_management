@@ -6,3 +6,9 @@ export async function signUp(user){
   .then((response)=> response.data);
   return result;
 }
+
+export async function login(loginData) {
+  
+  const result = await httpaxios.post("/api/login",loginData).then((response)=>response.data);
+  return result;
+}
