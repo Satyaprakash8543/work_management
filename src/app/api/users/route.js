@@ -95,7 +95,7 @@ try {
     user.password= bcrypt.hashSync(user.password,
      parseInt( process.env.BCRYPT_SALT))
     const createdUser=await user.save();
-    const response=NextResponse.json( user,{status:201})
+    const response=NextResponse.json( createdUser,{status:201})
     return response
   
   

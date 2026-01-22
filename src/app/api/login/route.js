@@ -31,11 +31,12 @@ export async function POST(request) {
    //4 create nextresponce cookie
        const response=NextResponse.json({
         message:"Login success !!",
-        success:true
+        success:true,
+        user:user
        })
      //5 set token into cookies
        response.cookies.set("authToken",token,{
-        expiresIn:"1d",
+        maxAge: 60 * 60 * 24, //  “Delete this cookie automatically after 24 hours.seconds × minutes × hours × days
         httpOnly:true
        })
 

@@ -1,10 +1,31 @@
 "use client";
 
+import UserContext from "@/context/userContext";
+import { logout } from "@/services/userServices";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function CustomNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const context = useContext(UserContext);
+  // console.log(context);
+  const router=useRouter();
+
+  async function doLogout() {
+    try {
+     const result= await logout();
+     console.log(result);
+     context.setUser(undefined);
+
+     router.push("/")
+    } catch (error) {
+       console.log(error);
+       toast.error("Logout Error");
+    }
+  }
 
   return (
     <header className="w-full bg-blue-600 text-white shadow-md">
@@ -16,40 +37,74 @@ export default function CustomNavbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden items-center gap-6 md:flex">
-          <li>
-            <Link href="/" className="hover:text-blue-200 transition">
-              Home
-            </Link>
-          </li>
+          {context.user && (
+            <>
+              <li>
+                <Link href="/" className="hover:text-blue-200 transition">
+                  Home
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/add-task" className="hover:text-blue-200 transition">
-              Add Task
-            </Link>
-          </li>
+              <li>
+                <Link
+                  href="/add-task"
+                  className="hover:text-blue-200 transition"
+                >
+                  Add Task
+                </Link>
+              </li>
 
-          <li>
-            <Link href="/show-task" className="hover:text-blue-200 transition">
-              Show Task
-            </Link>
-          </li>
+              <li>
+                <Link
+                  href="/show-task"
+                  className="hover:text-blue-200 transition"
+                >
+                  Show Task
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
 
         {/*  Buttons (Desktop) */}
         <div className="hidden items-center gap-4 md:flex">
-          <Link
-            href="/login"
-            className="rounded-md border border-white px-4 py-1 hover:bg-white hover:text-blue-600 transition"
-          >
-            Login
-          </Link>
+          {context.user && (
+            <>
+              <Link
+                href={"!#"}
+                className="rounded-md border border-white px-4 py-1 hover:bg-white hover:text-blue-600 transition"
+              >
+                {context.user.name}
+              </Link>
 
-          <Link
-            href="/signup"
-            className="rounded-md bg-pink-700 px-4 py-1 text-white hover:bg-pink-400 transition"
-          >
-            Signup
-          </Link>
+              <button
+                href={"#!"}
+                className="rounded-md bg-pink-700 px-4 py-1 text-white hover:bg-pink-400 transition"
+                 onClick={doLogout}
+              >
+                Logout
+              </button>
+            </>
+          )}
+
+          {!context.user && (
+            <>
+              <Link
+                href="/login"
+                className="rounded-md border border-white px-4 py-1 hover:bg-white hover:text-blue-600 transition"
+               
+              >
+                Login
+              </Link>
+
+              <Link
+                href="/signup"
+                className="rounded-md bg-pink-700 px-4 py-1 text-white hover:bg-pink-400 transition"
+              >
+                Signup
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
