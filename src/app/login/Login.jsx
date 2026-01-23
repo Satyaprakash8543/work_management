@@ -31,7 +31,7 @@ const Login = () => {
     try {
       const result = await login(loginData)
       console.log(result);
-      toast.success("Logged In");
+      toast.success("Logged In !!");
       //After login redirect page
       context.setUser(result.user); 
       router.push("/profile/user")
