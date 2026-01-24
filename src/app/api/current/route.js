@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { User } from "../../../models/user";
+import { connectDb } from "../../../helper/db";
 
-
+connectDb();
 //Handle login data current user
 
 export async function GET(request) {

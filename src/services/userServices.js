@@ -27,3 +27,5 @@ export async function logout() {
     .then((response) => response.data);
   return result;
 }
+
+

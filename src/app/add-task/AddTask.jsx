@@ -17,7 +17,7 @@ const AddTask = () => {
     content: "",
     status: "none",
     //temp solution
-    userID:"696a19965ea7a10050ae369d",
+    userId:"696a19965ea7a10050ae369d",
   });
 
   const handleAddTask= async(event)=>{
@@ -132,8 +132,8 @@ const AddTask = () => {
               <option value="none"  disabled>
                 ---Select Status---
               </option>
-              <option value="Pending">Pending</option>
-              <option value="Completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
             </select>
           </div>
 
